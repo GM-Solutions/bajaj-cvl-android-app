@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#990063b4"
+    >
+    <RelativeLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        >
+    <ImageView android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/miniscanner"
+        android:id="@+id/dashboardimageview"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:text="Redeem"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/dashboardimageview"
+        android:id="@+id/dashboardtextview"
+        />
+    </RelativeLayout>
+</RelativeLayout>

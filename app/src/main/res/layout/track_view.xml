@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_search_bar_shop_background"
+                android:id="@+id/relFirst"
+                android:padding="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@+id/logo"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:text="Track Gift Delivery"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="10dp"
+                android:layout_below="@+id/relFirst">
+                <ScrollView android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tracklayout"
+                     android:padding="10dp"
+                    android:background="@drawable/gradient_search_bar_shop_background"
+                    >
+
+                    <ImageView android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:id="@+id/approvedimageview"
+                        android:src="@drawable/trackactive"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/approvedtext"
+                        android:text="Ordered and Approved"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/approvedtextone"
+                        android:text="Your Order has been placed."
+                        android:layout_below="@+id/approvedtext"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#ffffff"/>
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/approvedtexttwo"
+                        android:text="Seller has processes Your Order."
+                        android:layout_below="@+id/approvedtextone"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="20dp"
+                        android:textColor="#ffffff"/>
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/approveddate"
+                        android:text="Wed, 24th May - 4:02pm"
+                        android:layout_below="@+id/approvedtexttwo"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#ffffff"/>
+
+                    <View android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:background="#1ffb01"
+                        android:layout_below="@+id/approvedimageview"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/approvedview"
+                        android:layout_above="@+id/approveddate"
+                        />
+
+                    <View android:layout_width="1dp"
+                        android:layout_height="60dp"
+                        android:background="#1ffb01"
+                        android:layout_below="@+id/approvedview"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/approvedviewone"
+
+                        />
+
+                    <ImageView android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:id="@+id/packedimageview"
+                        android:src="@drawable/trackactive"
+                        android:layout_below="@id/approvedviewone"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/packedtext"
+                        android:text="Packed"
+                        android:layout_toRightOf="@+id/packedimageview"
+                        android:layout_below="@id/approvedviewone"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/packedtextone"
+                        android:text="Your item has been picked up by courier partner"
+                        android:layout_below="@+id/packedtext"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#ffffff"/>
+
+
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/packeddate"
+                        android:text="Wed, 24th May - 4:02pm"
+                        android:layout_below="@+id/packedtextone"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#ffffff"/>
+
+                    <View android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:background="#1ffb01"
+                        android:layout_below="@+id/packedimageview"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/packedview"
+                        android:layout_above="@+id/packeddate"
+                        />
+
+                    <View android:layout_width="1dp"
+                        android:layout_height="60dp"
+                        android:background="#1ffb01"
+                        android:layout_below="@+id/packedview"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/packedviewone"
+
+                        />
+                    <ImageView android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:id="@+id/shipedimageview"
+                        android:src="@drawable/trackactive"
+                        android:layout_below="@id/packedviewone"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shipedtext"
+                        android:text="Shipped"
+                        android:layout_toRightOf="@+id/shipedimageview"
+                        android:layout_below="@id/packedviewone"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shippedone"
+                        android:text="Item has been shipped"
+                        android:layout_below="@+id/shipedtext"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#ffffff"/>
+
+
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shipeddate"
+                        android:text="Wed, 24th May - 4:02pm"
+                        android:layout_below="@+id/shippedone"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#ffffff"/>
+
+                    <View android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:background="#1ffb01"
+                        android:layout_below="@+id/packedimageview"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/shipedview"
+                        android:layout_above="@+id/shipeddate"
+                        />
+
+                    <View android:layout_width="1dp"
+                        android:layout_height="60dp"
+                        android:background="#1ffb01"
+                        android:layout_below="@+id/shipedview"
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/shipedviewone"
+
+                        />
+                    <ImageView android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:id="@+id/deliverimageview"
+                        android:src="@drawable/trackactive"
+                        android:layout_below="@id/shipedviewone"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/delivertext"
+                        android:text="Delivered"
+                        android:layout_toRightOf="@+id/deliverimageview"
+                        android:layout_below="@id/shipedviewone"
+                        android:layout_marginLeft="20dp"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        />
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/deliverone"
+                        android:text="Your Item has been Delivered."
+                        android:layout_below="@+id/delivertext"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#ffffff"/>
+
+
+
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/deliverdate"
+                        android:text="Wed, 24th May - 4:02pm"
+                        android:layout_below="@+id/deliverone"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/approvedimageview"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#ffffff"/>
+
+                </RelativeLayout>
+                </ScrollView>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Power Rewards</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_friends">Friends</string>
+    <string name="nav_item_notifications">Messages</string>
+    <string name="callfirst">+91 <u>78 4701 1011</u></string>
+    <string name="callsecond">+91 <u>88 8201 1011</u></string>
+    <string name="email"><u>hello@gladminds.co</u></string>
+    <string name="permission_rationale">"Storage permission is needed for fetching images from Gallery."</string>
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
+        <item>@string/nav_item_friends</item>
+        <item>@string/nav_item_notifications</item>
+    </string-array>
+
+    <string name="title_messages">Messages</string>
+    <string name="title_friends">Friends</string>
+    <string name="title_home">Home</string>
+    <string name="servererror">Oops, Server is not responding.</string>
+    <string name="alert_network_error_message">Oops, Bajaj server is not connected.</string>
+    <string name="btn_support_title">Email Support</string>
+
+    <string name="btn_reconnect_title">Try again</string>
+    <string name="title_activity_product_log">ProductLog</string>
+    <string name="title_activity_productscan">Product Scan</string>
+    <string name="title_activity_contact__us">Contact_Us</string>
+    <string name="title_activity_mygifts">Gifts</string>
+    <string name="title_activity_history">History</string>
+    <string name="title_activity_multi_photo">Multi_photo</string>
+
+    <!--OCR String-->
+
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">Ocr Detector Sample</string>
+    <string name="ocr_header">Click &quot;Detect Text&quot; to detect text</string>
+    <string name="read_text">Detect Text</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Use Flash</string>
+    <string name="ocr_success">Text read successfully</string>
+    <string name="ocr_failure">No text captured</string>
+    <string name="ocr_error">"Error reading text: %1$s"</string>
+
+
+    <string name="manual">1. Manual</string>
+    <string name="gallery">2. Gallery</string>
+    <string name="scan">3. Scan</string>
+    <string name="no_gift">No gift found, Please redeem some product</string>
+    <string name="upc_mismatch">Scan UPC is mismatch, Please edit and verify OR Remove and scan again!</string>
+    <string name="upc_option">Use any option to Add UPC in Cart</string>
+</resources>

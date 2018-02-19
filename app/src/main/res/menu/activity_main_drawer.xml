@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+    <item
+      android:id="@+id/accumulationinfo"
+      android:icon="@drawable/miniscanner"
+      android:title="Accumulation"
+
+        />
+  <item
+      android:id="@+id/balanceinfo"
+      android:icon="@drawable/minibalance"
+      android:title="Check Balance" />
+
+
+    <item
+        android:id="@+id/redeeminfo"
+        android:icon="@drawable/minireedem"
+        android:title="Redeem" />
+
+    <item
+        android:id="@+id/contactusinfo"
+        android:icon="@drawable/support"
+        android:title="Support" />
+
+  <item
+      android:id="@+id/historyinfo"
+      android:icon="@drawable/historynn"
+      android:title="History" />
+
+    <item
+        android:id="@+id/giftinfo"
+        android:icon="@drawable/gift"
+        android:title="Your Gifts" />
+
+
+
+
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/logout"
+        android:title="Logout" />
+
+</menu>
+

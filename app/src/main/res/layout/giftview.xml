@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#990063b4"
+            android:padding="10dp">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="#ffffff"
+                android:src="@drawable/placeholder" />
+
+            <TextView
+                android:id="@+id/redeemproductid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toLeftOf="@+id/redeempoints"
+                android:layout_toRightOf="@+id/profile_image"
+                android:padding="3dp"
+                android:text="Product Id: 2001"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/redeemdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/redeemproductid"
+                android:layout_marginLeft="5dp"
+                android:layout_toLeftOf="@+id/redeempoints"
+                android:layout_toRightOf="@+id/profile_image"
+                android:padding="2dp"
+                android:text="Please Enter OTP"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/redeempoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="LP:300"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/redeemprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/redeempoints"
+                android:padding="3dp"
+                android:text=""
+                android:textColor="#ffffff" />
+
+
+            <TextView
+                android:id="@+id/redeembutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="#00335b"
+                android:padding="10dp"
+                android:text="View Details"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/viewdetailone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="#808080"
+                android:padding="10dp"
+                android:text="View Details"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+
+            <ImageView
+                android:id="@+id/thumb_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/redeemdescription"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/profile_image"
+                android:src="@drawable/gift" />
+
+            <TextView
+                android:id="@+id/orderstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/redeemdescription"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/thumb_button"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Approved"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

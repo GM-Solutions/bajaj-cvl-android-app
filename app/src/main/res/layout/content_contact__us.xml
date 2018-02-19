@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_near_by_labs"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backimageloyalty"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.Contact_Us"
+    tools:showIn="@layout/activity_contactus">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/maincontactlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/contactlogo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/bajajlogo" />
+
+            <!--<ImageView-->
+            <!--android:id="@+id/visitlogo"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_below="@+id/contactlogo"-->
+            <!--android:src="@drawable/visit" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="VISIT US"-->
+            <!--android:id="@+id/visitus"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_below="@id/visitlogo"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:textColor="#555555" />-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="#74, Patel Ram Reddy Road,1st Stage, Domlur,"-->
+            <!--android:id="@+id/visitustext"-->
+            <!--android:layout_below="@id/visitus"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:textColor="#555555"-->
+
+            <!--/>-->
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Banglore 560071."-->
+            <!--android:id="@+id/visitustextone"-->
+            <!--android:layout_below="@id/visitustext"-->
+            <!--android:layout_centerHorizontal="true"-->
+
+            <!--android:textColor="#555555"-->
+
+            <!--/>-->
+
+            <ImageView
+                android:id="@+id/calllogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contactlogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/call" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/calllogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="PHONE"
+                android:textColor="#555555"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/phonelayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/productenquiries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For Product Enquiries:"
+                    android:textColor="#555555" />
+
+                <TextView
+                    android:id="@+id/callfirst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/productenquiries"
+                    android:text="@string/callfirst"
+                    android:textColor="#555555" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/phonelayoutone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phonelayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/hrenquiries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For HR Enquiries:"
+                    android:textColor="#555555" />
+
+                <TextView
+                    android:id="@+id/callsecond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/hrenquiries"
+                    android:text="@string/callsecond"
+                    android:textColor="#555555" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/msglogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phonelayoutone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/msg" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/msglogo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="EMAIL"
+                android:textColor="#555555"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/emaillayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/emailtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail:"
+                    android:textColor="#555555" />
+
+                <TextView
+                    android:id="@+id/emailid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/emailtext"
+                    android:text="@string/email"
+                    android:textColor="#555555" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

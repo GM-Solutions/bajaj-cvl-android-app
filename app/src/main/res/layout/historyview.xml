@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card2"
+
+
+        >
+
+        <RelativeLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardlayout"
+            android:padding="10dp"
+            android:background="#ffffff"
+
+            >
+
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/historyupccode"
+        android:text="UPCC0003"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/historydate"
+        />
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/historydate"
+        android:text="06-11-1992"
+        android:textColor="@color/darkgray"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/historypoint"
+        android:text="Points: 100"
+        android:textColor="@color/darkgray"
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/historydate"
+        android:gravity="right"
+        android:layout_marginTop="10dp"
+        />
+
+            <ImageView android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/historydetailicon"
+                android:src="@drawable/up"
+                android:layout_below="@+id/historypoint"
+                android:layout_alignParentRight="true"
+                 android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                />
+
+           <RelativeLayout android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/detaillayout"
+               android:layout_below="@+id/historydetailicon"
+               android:visibility="gone"
+               >
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/historycategory"
+                android:text="cattegory :car"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/darkgray"
+                />
+               <TextView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/historypart"
+                   android:text="cattegory :car"
+                   android:layout_centerHorizontal="true"
+                   android:gravity="center"
+                   android:layout_below="@+id/historycategory"
+                   android:layout_marginTop="10dp"
+                   android:textColor="@color/darkgray"
+                   />
+
+               <TextView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/historydescription"
+                   android:text="cattegory :car"
+                   android:layout_below="@+id/historypart"
+                   android:layout_centerHorizontal="true"
+                   android:gravity="center"
+                   android:layout_marginTop="10dp"
+                   android:textColor="@color/darkgray"
+                   />
+
+
+</RelativeLayout>
+</RelativeLayout>
+</android.support.v7.widget.CardView>
+</RelativeLayout>

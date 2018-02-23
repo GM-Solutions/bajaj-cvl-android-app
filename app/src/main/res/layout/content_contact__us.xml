@@ -23,8 +23,16 @@
                 android:id="@+id/contactlogo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/bajajlogo" />
+                android:padding="10dp"
+                android:src="@drawable/rewards" />
+
+            <ImageView
+                android:id="@+id/contactlogoRE"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:src="@drawable/gen_part" />
 
             <!--<ImageView-->
             <!--android:id="@+id/visitlogo"-->
@@ -188,7 +196,6 @@
                     android:layout_toRightOf="@+id/emailtext"
                     android:text="@string/email"
                     android:textColor="#555555" />
-
             </RelativeLayout>
 
         </RelativeLayout>

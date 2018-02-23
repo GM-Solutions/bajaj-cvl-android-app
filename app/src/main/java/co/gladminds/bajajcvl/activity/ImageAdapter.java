@@ -12,7 +12,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+
 import co.gladminds.bajajcvl.Common.Common;
+import co.gladminds.bajajcvl.R;
 
 import java.util.ArrayList;
 
@@ -38,8 +40,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     public ArrayList<String> getCheckedItems() {
         ArrayList<String> mTempArry = new ArrayList<String>();
 
-        for(int i=0;i<mImagesList.size();i++) {
-            if(mSparseBooleanArray.get(i)) {
+        for (int i = 0; i < mImagesList.size(); i++) {
+            if (mSparseBooleanArray.get(i)) {
                 mTempArry.add(mImagesList.get(i));
             }
         }
@@ -57,13 +59,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             count++;
-            if(count < 10){
+            if (count < 10) {
 
                 mSparseBooleanArray.put((Integer) buttonView.getTag(), isChecked);
-            }else{
+            } else {
                 buttonView.setChecked(false);
                 //Toast.makeText(mContext,"select 10 images in one time",Toast.LENGTH_SHORT).show();
-                Common.Customtoast(parentactivity,"select 10 images in one time");
+                Common.Customtoast(parentactivity, "select 10 images in one time");
             }
 
         }
@@ -83,11 +85,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
 
         String imageUrl = mImagesList.get(position);
 
-               Glide.with(mContext)
-                .load("file://"+imageUrl)
+        Glide.with(mContext)
+                .load("file://" + imageUrl)
                 .centerCrop()
-                .placeholder(co.gladminds.bajajcvl.R.drawable.bajajlogo)
-                .error(co.gladminds.bajajcvl.R.drawable.bajajlogo)
+                .placeholder(R.drawable.rewards)
+                .error(R.drawable.rewards)
                 .into(holder.imageView);
 
         holder.checkBox.setTag(position);

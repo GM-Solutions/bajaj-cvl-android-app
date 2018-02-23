@@ -54,10 +54,12 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
             TextBlock item = items.valueAt(i);
             Log.e("receiveDetections", "" + item.getValue());
             OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, item);
-
-            if (item.getValue().length() > 8)
-                validate(item.getValue());
-
+            if (item.getValue().length() > 8) {
+                boolean b = validate(item.getValue());
+                if (b) {
+                    break;
+                }
+            }
             mGraphicOverlay.add(graphic);
         }
         if (upc.size() > 0) {
@@ -78,8 +80,8 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
 
     public boolean validate(String str) {
         boolean value = false;
-
-        String[] ids = str.split(" ");
+        Log.e("validate", "Str :  : " + str);
+        String[] ids = str.replaceAll("\n", " ").split(" ");
 
         for (int i = 0; i < ids.length; i++) {
             Log.e("receiveDetections", "validate : " + ids[i]);

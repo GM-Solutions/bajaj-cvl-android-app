@@ -3,7 +3,9 @@ package co.gladminds.bajajcvl.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +32,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,8 +54,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -61,6 +68,7 @@ import java.util.List;
 import java.util.Set;
 
 import co.gladminds.bajajcvl.Common.Common;
+import co.gladminds.bajajcvl.ORCUtil.TessUtil;
 import co.gladminds.bajajcvl.R;
 import co.gladminds.bajajcvl.adapter.UPCRecycleAdapter;
 import co.gladminds.bajajcvl.interphace.OnResponseListener;
@@ -73,6 +81,7 @@ import okhttp3.RequestBody;
 
 public class CameraActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
+    private static final int CAMERA_REQUEST = 3;
     Camera camera;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;
@@ -89,6 +98,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     private UPCRecycleAdapter adapter;
     private ProgressBar progressBar;
     private Dialog dialogA;
+    private ImageView imageView;
 
 
     /**
@@ -98,13 +108,13 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-
         getWindow().setFormat(PixelFormat.UNKNOWN);
         surfaceView = (SurfaceView) findViewById(R.id.camerapreview);
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
+        imageView = (ImageView) findViewById(R.id.imageView);
         controlInflater = LayoutInflater.from(getBaseContext());
 //        View viewControl = controlInflater.inflate(R.layout.control, null);
 //        LayoutParams layoutParamsControl
@@ -129,7 +139,6 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-
                         }
                     }
                 });
@@ -205,7 +214,27 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                 saveToCart();
             }
         });
+
+        findViewById(R.id.camera).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takeImageFromCamera();
+            }
+        });
+
+        showInfoAlertDialog();
+//        initTessBaseAPI();
     }
+
+//    private void initTessBaseAPI() {
+//        datapath = getFilesDir() + "/tesseract/";
+//        //initialize Tesseract API
+//        TessUtil.checkFile(new File(datapath + "tessdata/"), this);
+//        String lang = "eng";
+//        mTess = new TessBaseAPI();
+//        mTess.init(datapath, lang);
+//
+//    }
 
 
     AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback() {
@@ -215,6 +244,23 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
             buttonTakePicture.setEnabled(true);
         }
     };
+
+
+    public void takeImageFromCamera() {
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            try {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                inspectFromBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     ShutterCallback myShutterCallback = new ShutterCallback() {
         @Override
@@ -272,6 +318,10 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
         if (camera != null) {
             try {
                 Camera.Parameters parameters = camera.getParameters();
+                Camera.Size size = getBestPreviewSize(width, height, parameters);
+                parameters.setPreviewSize(size.width, size.height);
+                parameters.setPictureSize(size.width, size.height);
+
                 if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
                     parameters.set("orientation", "portrait");
                     camera.setDisplayOrientation(90);
@@ -287,6 +337,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                     parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                 }
                 try {
+//                    camera.setParameters(parameters);
 //                    surfaceHolder.setFixedSize(300, 300);
                     camera.setPreviewDisplay(surfaceHolder);
                 } catch (IOException e) {
@@ -319,6 +370,10 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
 
 
     private void inspectFromBitmap(Bitmap bitmap) {
+        if (bitmap == null) {
+            Log.e("Bitmap", "  Bitmap : Null " + bitmap.toString());
+        }
+        Log.e("Bitmap", "  Bitmap : " + bitmap.toString());
         TextRecognizer textRecognizer = new TextRecognizer.Builder(this).build();
         try {
 
@@ -355,8 +410,14 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                 }
             }
 
+//            String OCRresult = null;
+//
+//            mTess.setImage(bitmap);
+//            OCRresult = mTess.getUTF8Text();
+//            detectedText.append(" " + OCRresult);
+
             Toast.makeText(this, detectedText.toString(), Toast.LENGTH_LONG);
-            String[] strings = detectedText.toString().split(" ");
+            String[] strings = detectedText.toString().replaceAll("\n", " ").split(" ");
             List<String> list = validate(Arrays.asList(strings));
 
             if (list.isEmpty()) {
@@ -379,9 +440,10 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
             is = new FileInputStream(file);
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            options.inSampleSize = 2;
-            options.inScreenDensity = DisplayMetrics.DENSITY_LOW;
-            bitmap = BitmapFactory.decodeStream(is, null, options);
+//            options.inSampleSize = 1;
+//            options.inScreenDensity = DisplayMetrics.DENSITY_HIGH;
+//            bitmap = BitmapFactory.decodeStream(is, null, options);
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
             int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -403,16 +465,20 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
             }
             Matrix matrix = new Matrix();
             matrix.postRotate(rotate);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-//            imageView.setImageBitmap(bitmap);
-            inspectFromBitmap(bitmap);
+            Bitmap b = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
+            Log.e("bitmap", "B---------- : " + b.getWidth() + "  h : " + b.getHeight());
+            Log.e("bitmap", "B-ddd--------- : " + bitmap.getByteCount());
+            Log.e("bitmap", "B-ddd--------- : " + b);
+            inspectFromBitmap(b);
+            imageView.setImageBitmap(bitmap);
 
         } catch (IOException e) {
             e.printStackTrace();
             Log.w("Camera", "Failed to find the file: " + file, e);
         } finally {
             if (bitmap != null) {
-                bitmap.recycle();
+//                bitmap.recycle();
             }
             if (is != null) {
                 try {
@@ -760,6 +826,42 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                 .post(body)
                 .build();
         okHttpRequest.httpPost(CameraActivity.this, request);
+    }
+
+
+    private Camera.Size getBestPreviewSize(int width, int height, Camera.Parameters parameters) {
+        Camera.Size result = null;
+
+        for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+            if (size.width <= width && size.height <= height) {
+                if (result == null) {
+                    result = size;
+                } else {
+                    int resultArea = result.width * result.height;
+                    int newArea = size.width * size.height;
+
+                    if (newArea > resultArea) {
+                        result = size;
+                    }
+                }
+            }
+        }
+
+        return (result);
+    }
+
+    private void showInfoAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert");
+        builder.setMessage("Please adjust UPC code inside the box and click on the scan button.")
+                .setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        dialog.dismiss();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 
 

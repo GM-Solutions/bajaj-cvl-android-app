@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -39,6 +40,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import co.gladminds.bajajcvl.Common.Common;
+import co.gladminds.bajajcvl.ORCUtil.TessUtil;
 import co.gladminds.bajajcvl.R;
 import co.gladminds.bajajcvl.adapter.FailedAdapter;
 import co.gladminds.bajajcvl.adapter.UPCRecycleAdapter;
@@ -54,6 +56,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -258,26 +261,31 @@ public class Productscan extends AppCompatActivity {
         (findViewById(R.id.tvScanUpc)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scanActivity();
+                ScanOption();
             }
         });
 
         (findViewById(R.id.scannerpic)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scanActivity();
+                ScanOption();
             }
         });
 
+//        initTessBaseAPI();
+
 
     }
 
-    private void scanActivity() {
-        Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
-        intent.putExtra(UPCScanActivity.AutoFocus, true);
-        intent.putExtra(UPCScanActivity.UseFlash, true);
-        startActivity(intent);
-    }
+//    private void initTessBaseAPI() {
+//        datapath = getFilesDir() + "/tesseract/";
+//        //initialize Tesseract API
+//        TessUtil.checkFile(new File(datapath + "tessdata/"), this);
+//        String lang = "eng";
+//        mTess = new TessBaseAPI();
+//        mTess.init(datapath, lang);
+//
+//    }
 
     @Override
     protected void onResume() {
@@ -945,16 +953,18 @@ public class Productscan extends AppCompatActivity {
                     return diffOfLefts;
                 }
             });
-//  StringBuilder detectedText = new StringBuilder();
             for (TextBlock textBlock : textBlocks) {
                 if (textBlock != null && textBlock.getValue() != null) {
                     detectedText.append(textBlock.getValue());
-                    detectedText.append("\n");
+                    detectedText.append(" ");
                 }
             }
 
-            //Toast.makeText(getApplicationContext(),"hi "+detectedText,Toast.LENGTH_SHORT).show();
-//            detecttextview.setText(detectedText);
+//            String OCRresult = null;
+//            mTess.setImage(bitmap);
+//            OCRresult = mTess.getUTF8Text();
+//            detectedText.append(" " + OCRresult);
+
             if (countofimages == Imagelist.size() - 1) {
                 Upcvarify(detectedText.toString(), "1");
             }
@@ -962,6 +972,31 @@ public class Productscan extends AppCompatActivity {
         } finally {
             textRecognizer.release();
         }
+    }
+
+    private void ScanOption() {
+        CharSequence colors[] = new CharSequence[]{"Auto Scan", "Manual Scan"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Scan Type");
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // the user clicked on colors[which]
+                if (which == 0) {
+                    Intent intent = new Intent(getApplicationContext(), UPCScanActivity.class);
+                    intent.putExtra(UPCScanActivity.AutoFocus, true);
+                    intent.putExtra(UPCScanActivity.UseFlash, true);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+                    intent.putExtra(UPCScanActivity.AutoFocus, true);
+                    intent.putExtra(UPCScanActivity.UseFlash, true);
+                    startActivity(intent);
+                }
+            }
+        });
+        builder.show();
     }
 
 

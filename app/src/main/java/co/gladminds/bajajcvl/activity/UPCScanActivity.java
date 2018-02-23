@@ -23,10 +23,14 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,6 +94,7 @@ public class UPCScanActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UPCRecycleAdapter adapter;
     private ProgressBar progressBar;
+    private Dialog dialogA;
 
     /**
      * Initializes the UI and creates the detector pipeline.
@@ -638,6 +643,7 @@ public class UPCScanActivity extends AppCompatActivity {
 
     }
 
+
     private void saveToCart() {
         SharedPreferences sharedpreferences = getSharedPreferences("bajaj_pref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -665,9 +671,155 @@ public class UPCScanActivity extends AppCompatActivity {
             Toast.makeText(this, "Valid UPC Not Found..", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, msg + " UPC's added to your cart.", Toast.LENGTH_LONG).show();
-            finish();
+            showDailog();
         }
 
+    }
+
+    public void showDailog() {
+
+        SharedPreferences sharedpreferences = getSharedPreferences("bajaj_pref", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+        Set<String> set = sharedpreferences.getStringSet("countbarcode", null);
+        if (set == null) {
+            set = new HashSet<>();
+        }
+        final List<String> list = new ArrayList<>();
+        list.addAll(set);
+
+        dialogA = new Dialog(this);
+        dialogA.setCancelable(true);
+        dialogA.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogA.setContentView(R.layout.barcode_layout);
+
+        final LinearLayout linearLayout = (LinearLayout) dialogA.findViewById(R.id.barcodelinear);
+        RelativeLayout send = (RelativeLayout) dialogA.findViewById(R.id.sendlayout);
+        RelativeLayout close = (RelativeLayout) dialogA.findViewById(R.id.closelayout);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogA.dismiss();
+            }
+        });
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        for (int i = 0; i < list.size(); i++) {
+            final View item = inflator.inflate(R.layout.barcode_view, null);
+            String getvalue = "" + list.get(i);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(10, 10, 10, 10);
+            item.setLayoutParams(layoutParams);
+            TextView barcodevalue = (TextView) item.findViewById(R.id.barcodetext);
+            final TextView cross = (TextView) item.findViewById(R.id.barcodecross);
+            cross.setTag(i);
+            cross.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = 0;
+                    if (cross.getTag() instanceof Integer) {
+                        position = (Integer) cross.getTag();
+                        if (position >= list.size()) {
+                            position = list.size() - 1;
+                        }
+                    }
+
+                    // Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_SHORT).show();
+                    try {
+                        list.remove(position);
+                        linearLayout.removeViewAt(position);
+                    } catch (Throwable ex) {
+                        //FirebaseCrash.report(new Exception(ex.toString()));
+                    }
+                    Set<String> setTestId = new HashSet<String>();
+                    setTestId.addAll(list);
+                    editor.putStringSet("countbarcode", setTestId);
+                    editor.commit();
+
+
+                }
+            });
+
+            send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendbarcode();
+
+                }
+            });
+            barcodevalue.setText(getvalue);
+            linearLayout.addView(item);
+        }
+
+        dialogA.show();
+    }
+
+
+    private void sendbarcode() {
+        final List barcodelist = new ArrayList();
+        SharedPreferences sharedpreferences = getSharedPreferences("bajaj_pref", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        Set<String> set = sharedpreferences.getStringSet("countbarcode", null);
+        barcodelist.addAll(set);
+
+        OkHttpRequest okHttpRequest = new OkHttpRequest();
+        okHttpRequest.setOnResponseListener(new OnResponseListener() {
+            @Override
+            public void onResponse(String result) {
+                // login.setVisibility(View.VISIBLE);
+                // progressBar.setVisibility(View.GONE);
+                Log.e("RESULT", result);
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(result);
+                    if (result != null) {
+                        if (jsonObject.optBoolean("status") == true) {
+                            if (dialogA != null && dialogA.isShowing())
+                                dialogA.dismiss();
+                            barcodelist.clear();
+                            Set<String> setTestId = new HashSet<String>();
+                            setTestId.addAll(barcodelist);
+                            editor.putStringSet("countbarcode", setTestId);
+                            editor.commit();
+                            Common.Customtoast(UPCScanActivity.this, jsonObject.optString("message"));
+                        } else {
+                            Common.Customtoast(UPCScanActivity.this, "Please try again");
+                        }
+                    } else {
+
+                        Common.Customtoast(UPCScanActivity.this, "Please try again");
+                    }
+                } catch (JSONException e) {
+                    FirebaseCrash.report(new Exception(e.toString()));
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        String userCredentials = "bajajcvl:gm1361";
+        byte[] data = null;
+        try {
+            data = userCredentials.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+            FirebaseCrash.report(new Exception(e1.toString()));
+            e1.printStackTrace();
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < barcodelist.size(); i++) {
+            String getvalue = "" + barcodelist.get(i);
+            sb.append(getvalue + ",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        String upccode = sb.toString();
+        String userid = Common.getPreferences(getApplicationContext(), "mobile_no");
+        String jsonstring = "{\"mobile_no\":\"" + userid + "\",\"upc\":\"" + upccode + "\"}";
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        okhttp3.RequestBody body = RequestBody.create(JSON, jsonstring);
+        Request request = new Request.Builder()
+                .url(Common.mainurl + "transaction/pointcollect")
+                .header("Authorization", "Basic " + Base64.encodeToString(data, Base64.NO_WRAP))
+                .post(body)
+                .build();
+        okHttpRequest.httpPost(UPCScanActivity.this, request);
     }
 
 

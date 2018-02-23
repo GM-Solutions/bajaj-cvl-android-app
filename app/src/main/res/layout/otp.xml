@@ -6,60 +6,73 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
 
             <RelativeLayout
+                android:id="@+id/relFirst"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient_search_bar_shop_background"
-                android:id="@+id/relFirst">
+                android:background="@drawable/gradient_search_bar_shop_background">
+
                 <TextView
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
-                    android:textSize="18sp"
                     android:layout_toRightOf="@+id/logo"
+                    android:text="Please Enter OTP"
                     android:textColor="#ffffff"
-                    android:textStyle="bold"
-                    android:text="Please Enter OTP"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
+                    android:id="@+id/logo"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:id="@+id/logo"
                     android:layout_margin="5dp"
-                    android:src="@drawable/bajajlogo"/>
+                    android:src="@drawable/re_logo" />
+
+
+                <ImageView
+                    android:id="@+id/logoRe"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/gen_part" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_below="@+id/relFirst">
+                android:layout_below="@+id/relFirst"
+                android:layout_marginTop="5dp">
+
                 <EditText
+                    android:id="@+id/otp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/otp"
-                    android:inputType="number"
-                    android:hint="Please Enter OTP"
-                    android:padding="10dp"
+                    android:layout_margin="10dp"
                     android:background="@drawable/square_box_blue"
-                    android:layout_margin="10dp"/>
+                    android:hint="Please Enter OTP"
+                    android:inputType="number"
+                    android:padding="10dp" />
 
                 <ProgressBar
+                    android:id="@+id/otpprogressbar"
                     style="?android:attr/progressBarStyleInverse"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignBottom="@id/otp"
                     android:layout_alignRight="@id/otp"
-                    android:layout_marginRight="10dp"
                     android:layout_alignTop="@id/otp"
-                    android:id="@+id/otpprogressbar"
-                    />
+                    android:layout_marginRight="10dp" />
 
                 <View
                     android:id="@+id/view1"
@@ -72,40 +85,42 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:padding="10dp"
                     android:layout_below="@+id/otp"
-                    android:layout_marginTop="20dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/cancel"
-                        android:textSize="16dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="#F54119"
-                        android:text="Cancel"/>
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="3">
 
                     <TextView
+                        android:id="@+id/cancel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/resend"
-                        android:textSize="16dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textColor="#EFCD73"
-                        android:text="Resend OTP"/>
+                        android:text="Cancel"
+                        android:textColor="#F54119"
+                        android:textSize="16dp" />
+
                     <TextView
+                        android:id="@+id/resend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Resend OTP"
+                        android:textColor="#EFCD73"
+                        android:textSize="16dp" />
+
+                    <TextView
                         android:id="@+id/verify"
-                        android:textSize="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="Verify OTP"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 

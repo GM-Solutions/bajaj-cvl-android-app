@@ -14,7 +14,7 @@
             android:id="@+id/custom_toast_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/bajajlogo" />
+            android:src="@drawable/rewards" />
 
         <TextView
             android:id="@+id/custom_toast_message"

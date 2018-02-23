@@ -59,10 +59,10 @@ public class Common {
     private static Dialog dialog;
     static String[] formatStrings = {"dd/MM/yyyy", "dd-MMM-yy", "M-d-y"};
 
-    //        public static String mainurl = "http://124.153.104.69:8059/api/";//QA
+        public static String mainurl = "http://124.153.104.69:8059/api/";//QA
 //
     //    public static String mainurl="http://124.153.104.69:8061/api/";//Prod
-    public static String mainurl = "http://bajajcvloyalty.gladminds.co/api/";//Prod
+//    public static String mainurl = "http://bajajcvloyalty.gladminds.co/api/";//Prod
 
     //public static AlbumsAdapter adapter;
     //public static List<Album> product_list;
